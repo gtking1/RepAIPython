@@ -1,11 +1,11 @@
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-plt.rcParams['figure.figsize'] = 40, 12
+plt.rcParams['figure.figsize'] = 80, 12
 
-data = np.loadtxt('10202025636PMData', delimiter=',')
-setMarkers = np.loadtxt('10202025636PMSetMarkers', delimiter='\0')
-repMarkers = np.loadtxt('10202025636PMRepMarkers', delimiter='\0')
+data = np.loadtxt('10212025757PMData', delimiter=',')
+setMarkers = np.loadtxt('10212025756PMSetMarkers', delimiter='\0')
+repMarkers = np.loadtxt('10212025756PMRepMarkers', delimiter='\0')
 print(len(data))
 # print(len(setMarkers))
 #data = data.reshape((len(data) // 8, 8))
@@ -14,11 +14,12 @@ df = pd.DataFrame(data[0:,0:])
 print(len(df))
 df.columns = ['Time', 'AccX', 'AccY', 'AccZ', 'GyrX', 'GyrY', 'GyrZ', 'HR']
 df['Exercise'] = pd.Series(['Idle'] * len(df))
-df.loc[(df.Time >= 237.60957300662994) & (df.Time <= 279.49456095695496), "Exercise"] = 'MachineChestPress'
-df.loc[(df.Time >= 637.5524300336838) & (df.Time <= 680.0952860116959), "Exercise"] = 'MachineChestPress'
-df.loc[(df.Time >= 943.0562419891357) & (df.Time <= 988.0508450269699), "Exercise"] = 'RopeOverheadTricepsExtension'
-df.loc[(df.Time >= 1171.8675060272217) & (df.Time <= 1214.2162539958954), "Exercise"] = 'DumbbellLateralRaise'
-# df['Exercise'] = pd.Series()
+df.loc[(df.Time >= 4.481359004974365) & (df.Time <= 41.07985806465149), "Exercise"] = 'PullUp'
+df.loc[(df.Time >= 502.4444980621338) & (df.Time <= 533.6277290582657), "Exercise"] = 'PullUp'
+df.loc[(df.Time >= 894.2969930171967) & (df.Time <= 922.568874001503), "Exercise"] = 'PullUp'
+df.loc[(df.Time >= 1289.7804629802704) & (df.Time <= 1350.267012000084), "Exercise"] = 'BarbellRow'
+df.loc[(df.Time >= 1720.529265999794) & (df.Time <= 1754.6738389730453), "Exercise"] = 'BarbellRow'
+df.loc[(df.Time >= 1892.5951030254364) & (df.Time <= 1929.585245013237), "Exercise"] = 'BarbellRow'
 print(df.head())
 print(df.tail())
 
