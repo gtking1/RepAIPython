@@ -3,9 +3,9 @@ import pandas as pd
 import matplotlib.pyplot as plt
 plt.rcParams['figure.figsize'] = 80, 12
 
-data = np.loadtxt('10212025836PMData', delimiter=',')
-setMarkers = np.loadtxt('10212025836PMSetMarkers', delimiter='\0')
-repMarkers = np.loadtxt('10212025836PMRepMarkers', delimiter='\0')
+data = np.loadtxt('10222025602PMData', delimiter=',')
+setMarkers = np.loadtxt('10222025602PMSetMarkers', delimiter='\0')
+repMarkers = np.loadtxt('10222025602PMRepMarkers', delimiter='\0')
 print(len(data))
 # print(len(setMarkers))
 #data = data.reshape((len(data) // 8, 8))
@@ -14,15 +14,12 @@ df = pd.DataFrame(data[0:,0:])
 print(len(df))
 df.columns = ['Time', 'AccX', 'AccY', 'AccZ', 'GyrX', 'GyrY', 'GyrZ', 'HR']
 df['Exercise'] = pd.Series(['Idle'] * len(df))
-df.loc[(df.Time >= 13.763474941253662) & (df.Time <= 75.24), "Exercise"] = 'CablePullover'
-df.loc[(df.Time >= 156.003515958786) & (df.Time <= 191.20), "Exercise"] = 'PreacherCurl'
-df.loc[(df.Time >= 249.97008097171783) & (df.Time <= 308.34), "Exercise"] = 'CablePullover'
-df.loc[(df.Time >= 362.13921797275543) & (df.Time <= 394.52), "Exercise"] = 'PreacherCurl'
-df.loc[(df.Time >= 466.45665895938873) & (df.Time <= 518.26), "Exercise"] = 'CablePullover'
-df.loc[(df.Time >= 569.3107579946518) & (df.Time <= 605.73), "Exercise"] = 'PreacherCurl'
-df.loc[(df.Time >= 807.5213029384613) & (df.Time <= 853.51), "Exercise"] = 'DumbbellCurl'
-df.loc[(df.Time >= 1017.3243778944016) & (df.Time <= 1052.11), "Exercise"] = 'DumbbellCurl'
-df.loc[(df.Time >= 1230.5598009824753) & (df.Time <= 1274.55), "Exercise"] = 'DumbbellCurl'
+df.loc[(df.Time >= 10.948675990104675) & (df.Time <= 45.09506702423096), "Exercise"] = 'CableCrunch'
+df.loc[(df.Time >= 422.68037497997284) & (df.Time <= 461.59900403022766), "Exercise"] = 'CableCrunch'
+df.loc[(df.Time >= 727.1280989646912) & (df.Time <= 770.3923320770264), "Exercise"] = 'CableCrunch'
+df.loc[(df.Time >= 1379.362074971199) & (df.Time <= 1415.189087986946), "Exercise"] = 'CableWristCurl'
+df.loc[(df.Time >= 1552.735673069954) & (df.Time <= 1593.0216740369797), "Exercise"] = 'CableReverseWristCurl'
+df.loc[(df.Time >= 2233.4507039785385) & (df.Time <= 2292.706992983818), "Exercise"] = 'DumbbellRDL'
 print(df.head())
 print(df.tail())
 
@@ -46,7 +43,7 @@ axes[2].plot(df.Time, df.AccZ, color='green')
 #axes[2].vlines(setMarkers, min(df.AccZ), max(df.AccZ), colors="blue")
 axes[2].set_title('Z')
 fig.tight_layout()
-#plt.show()
+# plt.show()
 plt.savefig('AccelerometerPlots')
 
 fig, axes = plt.subplots(3)
@@ -67,7 +64,7 @@ plt.savefig('GyroscopePlots')
 fig, axes = plt.subplots(1)
 fig.suptitle('Heart Rate')
 plt.plot(df.Time, df.HR, color='red')
-#axes.vlines(setMarkers, min(df.HR), max(df.HR), colors="blue")
-#axes.vlines(repMarkers, min(df.HR), max(df.HR), colors="green")
+axes.vlines(setMarkers, min(df.HR), max(df.HR), colors="blue")
+axes.vlines(repMarkers, min(df.HR), max(df.HR), colors="green")
 fig.tight_layout()
 plt.savefig('HeartRatePlot')
