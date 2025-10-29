@@ -3,9 +3,9 @@ import pandas as pd
 import matplotlib.pyplot as plt
 plt.rcParams['figure.figsize'] = 80, 12
 
-data = np.loadtxt('10222025602PMData', delimiter=',')
-setMarkers = np.loadtxt('10222025602PMSetMarkers', delimiter='\0')
-repMarkers = np.loadtxt('10222025602PMRepMarkers', delimiter='\0')
+data = np.loadtxt('10272025750PMData', delimiter=',')
+setMarkers = np.loadtxt('10272025750PMSetMarkers', delimiter='\0')
+repMarkers = np.loadtxt('10272025750PMRepMarkers', delimiter='\0')
 print(len(data))
 # print(len(setMarkers))
 #data = data.reshape((len(data) // 8, 8))
@@ -14,12 +14,10 @@ df = pd.DataFrame(data[0:,0:])
 print(len(df))
 df.columns = ['Time', 'AccX', 'AccY', 'AccZ', 'GyrX', 'GyrY', 'GyrZ', 'HR']
 df['Exercise'] = pd.Series(['Idle'] * len(df))
-df.loc[(df.Time >= 10.948675990104675) & (df.Time <= 45.09506702423096), "Exercise"] = 'CableCrunch'
-df.loc[(df.Time >= 422.68037497997284) & (df.Time <= 461.59900403022766), "Exercise"] = 'CableCrunch'
-df.loc[(df.Time >= 727.1280989646912) & (df.Time <= 770.3923320770264), "Exercise"] = 'CableCrunch'
-df.loc[(df.Time >= 1379.362074971199) & (df.Time <= 1415.189087986946), "Exercise"] = 'CableWristCurl'
-df.loc[(df.Time >= 1552.735673069954) & (df.Time <= 1593.0216740369797), "Exercise"] = 'CableReverseWristCurl'
-df.loc[(df.Time >= 2233.4507039785385) & (df.Time <= 2292.706992983818), "Exercise"] = 'DumbbellRDL'
+df.loc[(df.Time >= 455.68960201740265) & (df.Time <= 520.5199859142303), "Exercise"] = 'SmithMachineShoulderPress'
+df.loc[(df.Time >= 1156.8904869556427) & (df.Time <= 1210.350793004036), "Exercise"] = 'SmithMachineShoulderPress'
+df.loc[(df.Time >= 1396.1798249483109) & (df.Time <= 1445.7340869903564), "Exercise"] = 'DumbbellLateralRaise'
+df.loc[(df.Time >= 1726.1361879110336) & (df.Time <= 1768.2833089828491), "Exercise"] = 'JMPress'
 print(df.head())
 print(df.tail())
 
@@ -43,7 +41,7 @@ axes[2].plot(df.Time, df.AccZ, color='green')
 #axes[2].vlines(setMarkers, min(df.AccZ), max(df.AccZ), colors="blue")
 axes[2].set_title('Z')
 fig.tight_layout()
-# plt.show()
+plt.show()
 plt.savefig('AccelerometerPlots')
 
 fig, axes = plt.subplots(3)
